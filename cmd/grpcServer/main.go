@@ -9,6 +9,7 @@ import (
 	"github.com/jonathanvinicius/grpc_full_cycle/internal/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
@@ -20,7 +21,6 @@ func main() {
 
 	categoryDb := database.NewCategory(db)
 	categoryService := service.NewCategoryService(*categoryDb)
-	
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterCategoryServiceServer(grpcServer, categoryService)
